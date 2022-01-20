@@ -25,7 +25,7 @@ namespace vr
     private:
         Window                       window{ WIDTH, HEIGHT, "Output window" };
         Device                       device{ window };
-        SwapChain                    swapChain{ device, window.getExtent() };
+        std::unique_ptr<SwapChain>   swapChain;
         std::unique_ptr<Pipeline>    pipeline;
         VkPipelineLayout             pipelineLayout;
         std::vector<VkCommandBuffer> commandBuffers;
@@ -36,5 +36,8 @@ namespace vr
         void createCommandBuffers();
         void drawFrame();
         void loadModels();
+        void recreateSwapChain();
+        void recordCommandBuffer(int imageIndex);
+        void freeCommandBuffers();
     };
 }
