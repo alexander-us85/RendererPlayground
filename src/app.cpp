@@ -217,18 +217,37 @@ namespace vr
         sierpinski(vertices, 4, { -0.5f, 0.5f }, { 0.5f, 0.5f }, { 0.0f, -0.5f });
         auto model = std::make_shared<Model>(device, vertices);
 
-        auto triangle = GameObject::createGameObject();
-        triangle.model = model;
-        triangle.color = { .1f, .8f, .1f };
-        triangle.transform2d.translation.x = .2f;
-        triangle.transform2d.scale = { 2.f, .5f };
-        triangle.transform2d.rotation = .25f * glm::two_pi<float>();
+        std::vector<glm::vec3> colors{
+            { 0.0f, 0.39f, 0.49f},
+            {0.41f, 0.44f, 0.07f},
+            {0.96f, 0.75f,  0.0f},
+            {0.72f, 0.66f, 0.60f},
+            { 0.0f, 0.61f, 0.87f}
+        };
 
-        gameObjects.push_back(std::move(triangle));
+        for (auto& color : colors) {
+            color = glm::pow(color, glm::vec3{ 2.2f });
+        }
+
+        for (int i = 0; i < 40; i++) {
+            auto triangle = GameObject::createGameObject();
+            triangle.model = model;
+            triangle.color = colors[i % colors.size()];
+            triangle.transform2d.scale = glm::vec2(.5f) + i * 0.025f;
+            triangle.transform2d.rotation = i * glm::pi<float>() * .025f;
+            gameObjects.push_back(std::move(triangle));
+        }
     }
 
     void App::renderGameObjects(VkCommandBuffer commandBuffer)
     {
+        // Update
+        int i = 0;
+        for (auto& obj : gameObjects) {
+            i += 1;
+            obj.transform2d.rotation = glm::mod<float>(obj.transform2d.rotation + 0.00005f * i, 2.f * glm::pi<float>());
+        }
+
         pipeline->bind(commandBuffer);
 
         for (auto& obj: gameObjects) {

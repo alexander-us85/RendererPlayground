@@ -16,7 +16,7 @@ namespace vr
         const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
         void* pUserData
     ) {
-        std::cerr << "Validation layer: " << pCallbackData->pMessage << std::endl;
+        //std::cerr << "Validation layer: " << pCallbackData->pMessage << std::endl;
         return VK_FALSE;
     }
 
