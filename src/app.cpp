@@ -7,9 +7,9 @@ static void sierpinski(std::vector<vr::Model::Vertex>& vertices, int depth,
     glm::vec2 left, glm::vec2 right, glm::vec2 top)
 {
     if (depth <= 0) {
-        vertices.push_back({ top });
-        vertices.push_back({ right });
-        vertices.push_back({ left });
+        vertices.push_back({ top,   glm::vec3(1.0, 0.0, 0.0) });
+        vertices.push_back({ right, glm::vec3(0.0, 1.0, 0.0) });
+        vertices.push_back({ left,  glm::vec3(0.0, 0.0, 1.0) });
     } else {
         auto leftTop = 0.5f * (left + top);
         auto rightTop = 0.5f * (right + top);
@@ -102,7 +102,7 @@ namespace vr
             renderPassInfo.renderArea.extent = swapChain.getSwapChainExtent();
 
             std::array<VkClearValue, 2> clearValues{};
-            clearValues[0].color = { 0.3f, 0.2f, 0.1f, 1.0f };
+            clearValues[0].color = { 0.05f, 0.05f, 0.05f, 1.0f };
             clearValues[1].depthStencil = { 1.0f, 0 };
             renderPassInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
             renderPassInfo.pClearValues = clearValues.data();
@@ -137,7 +137,7 @@ namespace vr
     void App::loadModels()
     {
         std::vector<Model::Vertex> vertices{};
-        sierpinski(vertices, 5, { -0.5f, 0.5f }, { 0.5f, 0.5f }, { 0.0f, -0.5f });
+        sierpinski(vertices, 2, { -0.5f, 0.5f }, { 0.5f, 0.5f }, { 0.0f, -0.5f });
 
         model = std::make_unique<Model>(device, vertices);
     }
