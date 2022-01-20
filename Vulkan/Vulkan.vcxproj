@@ -159,6 +159,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\app.cpp" />
+    <ClCompile Include="..\src\game_object.cpp" />
     <ClCompile Include="..\src\gfx_device.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\model.cpp" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\app.hpp" />
+    <ClInclude Include="..\include\game_object.hpp" />
     <ClInclude Include="..\include\gfx_device.hpp" />
     <ClInclude Include="..\include\model.hpp" />
     <ClInclude Include="..\include\pipeline.hpp" />
