@@ -31,13 +31,20 @@ namespace vr
         uint32_t width()                        { return swapChainExtent.width; }
         uint32_t height()                       { return swapChainExtent.height; }
 
-        float extentAspectRatio() {
+        float extentAspectRatio()
+        {
             return static_cast<float>(swapChainExtent.width) / static_cast<float>(swapChainExtent.height);
         }
 
         VkFormat findDepthFormat();
         VkResult acquireNextImage(uint32_t* imageIndex);
         VkResult submitCommandBuffers(const VkCommandBuffer* buffers, uint32_t* imageIndex);
+
+        bool compareSwapFormats(const SwapChain& swapChain) const
+        {
+            return swapChain.swapChainDepthFormat == swapChainDepthFormat && 
+                   swapChain.swapChainImageFormat == swapChainImageFormat;
+        }
 
     private:
         void init();
@@ -54,6 +61,7 @@ namespace vr
         VkExtent2D chooseSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities);
 
         VkFormat                    swapChainImageFormat;
+        VkFormat                    swapChainDepthFormat;
         VkExtent2D                  swapChainExtent;
         std::vector<VkFramebuffer>  swapChainFramebuffers;
         VkRenderPass                renderPass;
