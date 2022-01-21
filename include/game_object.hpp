@@ -36,7 +36,7 @@ namespace vr
         id_t getId() { return id; }
 
         GameObject(const GameObject&)               = delete;
-        GameObject& operator=(const GameObject&)    = delete;
+        void operator=(const GameObject&)           = delete;
         GameObject(GameObject&&)                    = default;
         GameObject& operator=(GameObject&&)         = default;
 

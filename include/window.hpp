@@ -20,7 +20,7 @@ namespace vr
         void createWindowSurface(VkInstance instance, VkSurfaceKHR* surface);
 
         Window(const Window&) = delete;
-        Window& operator=(const Window&) = delete;
+        void operator=(const Window&) = delete;
 
     private:
         static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
