@@ -8,7 +8,7 @@ namespace vr
     {
     public:
         Sierpinski() {}
-        ~Sierpinski() {}
+        ~Sierpinski() override;
 
         Sierpinski(const Sierpinski&) = delete;
         void operator=(const Sierpinski&) = delete;
@@ -16,7 +16,6 @@ namespace vr
         void init(Device& device);
         std::vector<GameObject>& getGameObjects() { return gameObjects; }
         void update();
-        void terminate();
 
     private:
         std::vector<GameObject> gameObjects;

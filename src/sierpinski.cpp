@@ -24,7 +24,7 @@ static void sierpinski(std::vector<vr::Model::Vertex>& vertices, int depth,
 
 namespace vr
 {
-    void vr::Sierpinski::terminate()
+    Sierpinski::~Sierpinski()
     {
         gameObjects.clear();
     }

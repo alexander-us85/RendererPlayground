@@ -13,7 +13,6 @@ namespace vr
 
     App::~App() 
     {
-        demo->terminate();
     }
 
     void App::run()
