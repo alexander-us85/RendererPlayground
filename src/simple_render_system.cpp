@@ -7,6 +7,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 
+#pragma warning(disable:26812)
+
 namespace vr
 {
     struct SimplePushConstantData

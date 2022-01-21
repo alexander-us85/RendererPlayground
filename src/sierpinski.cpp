@@ -57,7 +57,7 @@ namespace vr
         }
     }
 
-    void Sierpinski::update()
+    void Sierpinski::update(const float dt)
     {
         int i = 0;
         for (auto& obj : gameObjects) {

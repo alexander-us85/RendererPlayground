@@ -15,7 +15,7 @@ namespace vr
 
         void init(Device& device);
         std::vector<GameObject>& getGameObjects() { return gameObjects; }
-        void update();
+        void update(const float dt);
 
     private:
         std::vector<GameObject> gameObjects;

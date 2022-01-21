@@ -57,6 +57,9 @@
     <ClCompile Include="..\src\sierpinski.cpp">
       <Filter>Source Files\Demo</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\gravity.cpp">
+      <Filter>Source Files\Demo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\window.hpp">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="..\include\demo.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\gravity.hpp">
+      <Filter>Header Files\Demo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

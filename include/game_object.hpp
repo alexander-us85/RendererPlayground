@@ -21,6 +21,12 @@ namespace vr
         }
     };
 
+    struct RigidBody2DComponent
+    {
+        glm::vec2 velocity;
+        float mass;
+    };
+
 
     class GameObject
     {
@@ -43,6 +49,7 @@ namespace vr
         std::shared_ptr<Model> model{};
         glm::vec3              color{};
         Transform2DComponent   transform2d{};
+        RigidBody2DComponent   rigidBody2D{};
 
 
     private:
