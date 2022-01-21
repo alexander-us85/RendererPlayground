@@ -16,6 +16,12 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{d138dbbf-8fb9-483d-9ac5-760645b77ecb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Demo">
+      <UniqueIdentifier>{2105ac53-85ae-43fc-847c-12bc88261d4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Demo">
+      <UniqueIdentifier>{123c9a78-9298-4938-8aec-218a951234c9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\main.cpp">
@@ -48,6 +54,9 @@
     <ClCompile Include="..\src\simple_render_system.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\sierpinski.cpp">
+      <Filter>Source Files\Demo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\window.hpp">
@@ -75,6 +84,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\simple_render_system.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sierpinski.hpp">
+      <Filter>Header Files\Demo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\demo.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

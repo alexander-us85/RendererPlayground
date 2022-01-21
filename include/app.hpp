@@ -3,6 +3,7 @@
 #include "gfx_device.hpp"
 #include "renderer.hpp"
 #include "game_object.hpp"
+#include "demo.hpp"
 #include <memory>
 
 namespace vr
@@ -25,8 +26,6 @@ namespace vr
         Window                       window{ WIDTH, HEIGHT, "Output window" };
         Device                       device{ window };
         Renderer                     renderer{ window, device };
-        std::vector<GameObject>      gameObjects;
-
-        void loadGameObjects();
+        std::unique_ptr<Demo>        demo;
     };
 }

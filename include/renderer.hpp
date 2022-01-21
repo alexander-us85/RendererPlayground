@@ -14,7 +14,7 @@ namespace vr
         ~Renderer();
 
         Renderer(const Renderer&) = delete;
-        Renderer& operator=(const Renderer&) = delete;
+        void operator=(const Renderer&) = delete;
 
         bool isFrameInProgress() const { return isFrameStarted; }
         VkRenderPass getSwapChainRenderPass() const { return swapChain->getRenderPass(); }

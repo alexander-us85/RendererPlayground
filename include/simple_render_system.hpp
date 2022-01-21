@@ -13,7 +13,7 @@ namespace vr
         ~SimpleRenderSystem();
 
         SimpleRenderSystem(const SimpleRenderSystem&) = delete;
-        SimpleRenderSystem& operator=(const SimpleRenderSystem&) = delete;
+        void operator=(const SimpleRenderSystem&) = delete;
 
         void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects);
 

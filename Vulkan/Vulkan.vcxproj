@@ -165,17 +165,20 @@
     <ClCompile Include="..\src\model.cpp" />
     <ClCompile Include="..\src\pipeline.cpp" />
     <ClCompile Include="..\src\renderer.cpp" />
+    <ClCompile Include="..\src\sierpinski.cpp" />
     <ClCompile Include="..\src\simple_render_system.cpp" />
     <ClCompile Include="..\src\swap_chain.cpp" />
     <ClCompile Include="..\src\window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\app.hpp" />
+    <ClInclude Include="..\include\demo.hpp" />
     <ClInclude Include="..\include\game_object.hpp" />
     <ClInclude Include="..\include\gfx_device.hpp" />
     <ClInclude Include="..\include\model.hpp" />
     <ClInclude Include="..\include\pipeline.hpp" />
     <ClInclude Include="..\include\renderer.hpp" />
+    <ClInclude Include="..\include\sierpinski.hpp" />
     <ClInclude Include="..\include\simple_render_system.hpp" />
     <ClInclude Include="..\include\swap_chain.hpp" />
     <ClInclude Include="..\include\window.hpp" />

@@ -63,13 +63,6 @@ namespace vr
 
     void SimpleRenderSystem::renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects)
     {
-        // Update
-        int i = 0;
-        for (auto& obj : gameObjects) {
-            i += 1;
-            obj.transform2d.rotation = glm::mod<float>(obj.transform2d.rotation + 0.00005f * i, 2.f * glm::pi<float>());
-        }
-
         pipeline->bind(commandBuffer);
 
         for (auto& obj : gameObjects) {

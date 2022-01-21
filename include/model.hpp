@@ -25,7 +25,7 @@ namespace vr
         ~Model();
 
         Model(const Model&) = delete;
-        Model& operator=(const Model&) = delete;
+        void operator=(const Model&) = delete;
 
         void bind(VkCommandBuffer commandBuffer);
         void draw(VkCommandBuffer commandBuffer);
