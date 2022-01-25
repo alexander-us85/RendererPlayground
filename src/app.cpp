@@ -4,6 +4,7 @@
 #include "sierpinski.hpp"
 #include "gravity.hpp"
 #include "cube.hpp"
+#include "camera.hpp"
 
 namespace vr
 {
@@ -22,13 +23,18 @@ namespace vr
     void App::run()
     {
         SimpleRenderSystem simpleRenderSystem{ device, renderer.getSwapChainRenderPass() };
+        Camera camera{};
 
         while (!window.shouldClose()) {
             glfwPollEvents();
+            float aspect = renderer.getAspectRatio();
+            //camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 1);
+            camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 10.f);
+
             demo->update(1.f / 6000.f);
             if (auto commandBuffer = renderer.beginFrame()) {
                 renderer.beginSwapChainRenderPass(commandBuffer);
-                simpleRenderSystem.renderGameObjects(commandBuffer, demo->getGameObjects());
+                simpleRenderSystem.renderGameObjects(commandBuffer, demo->getGameObjects(), camera);
                 renderer.endSwapChainRenderPass(commandBuffer);
                 renderer.endFrame();
             }

@@ -18,6 +18,7 @@ namespace vr
 
         bool isFrameInProgress() const { return isFrameStarted; }
         VkRenderPass getSwapChainRenderPass() const { return swapChain->getRenderPass(); }
+        float getAspectRatio() const { return swapChain->extentAspectRatio(); }
 
         VkCommandBuffer getCurrentCommandBuffer() const
         {
@@ -35,6 +36,7 @@ namespace vr
         void endFrame();
         void beginSwapChainRenderPass(VkCommandBuffer commandBuffer);
         void endSwapChainRenderPass(VkCommandBuffer commandBuffer);
+
 
     private:
         Window&                      window;

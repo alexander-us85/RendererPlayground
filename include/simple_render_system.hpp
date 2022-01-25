@@ -1,4 +1,6 @@
 #pragma once
+
+#include "camera.hpp"
 #include "pipeline.hpp"
 #include "gfx_device.hpp"
 #include "game_object.hpp"
@@ -15,7 +17,8 @@ namespace vr
         SimpleRenderSystem(const SimpleRenderSystem&) = delete;
         void operator=(const SimpleRenderSystem&) = delete;
 
-        void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects);
+        void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects,
+            const Camera& camera);
 
 
     private:
