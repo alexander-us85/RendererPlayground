@@ -1,2 +1,3 @@
-for /r %%v in (shaders\*.vert) do C:\VulkanSDK\1.2.198.1\Bin\glslc "%%v" -o "%%v.spv"
-for /r %%v in (shaders\*.frag) do C:\VulkanSDK\1.2.198.1\Bin\glslc "%%v" -o "%%v.spv"
+@echo on
+for /r %%f in (shaders\*.vert shaders\*.tesc shaders\*.tese shaders\*.geom shaders\*.frag shaders\*.comp) do C:\VulkanSDK\1.2.198.1\Bin\glslc.exe -o %%f.spv %%f
+

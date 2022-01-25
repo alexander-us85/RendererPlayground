@@ -5,7 +5,7 @@
 #include <glm/gtc/constants.hpp>
 
 static void sierpinski(std::vector<vr::Model::Vertex>& vertices, int depth,
-    glm::vec2 left, glm::vec2 right, glm::vec2 top)
+    glm::vec3 left, glm::vec3 right, glm::vec3 top)
 {
     if (depth <= 0) {
         vertices.push_back({ top,   glm::vec3(1.0, 0.0, 0.0) });
@@ -32,7 +32,7 @@ namespace vr
     void Sierpinski::init(Device& device)
     {
         std::vector<Model::Vertex> vertices{};
-        sierpinski(vertices, 4, { -0.5f, 0.5f }, { 0.5f, 0.5f }, { 0.0f, -0.5f });
+        sierpinski(vertices, 4, { -0.5f, 0.5f, .0f }, { 0.5f, 0.5f, .0f }, { 0.0f, -0.5f, 0.f });
         auto model = std::make_shared<Model>(device, vertices);
 
         std::vector<glm::vec3> colors{
@@ -51,8 +51,8 @@ namespace vr
             auto triangle = GameObject::createGameObject();
             triangle.model = model;
             triangle.color = colors[i % colors.size()];
-            triangle.transform2d.scale = glm::vec2(.5f) + i * 0.025f;
-            triangle.transform2d.rotation = i * glm::pi<float>() * .025f;
+            triangle.transform.scale = glm::vec3(.5f, .5f, 1.f) + i * 0.025f;
+            triangle.transform.rotation = glm::vec3(0.f, 0.f, i * glm::pi<float>() * .025f);
             gameObjects.push_back(std::move(triangle));
         }
     }
@@ -62,7 +62,7 @@ namespace vr
         int i = 0;
         for (auto& obj : gameObjects) {
             i += 1;
-            obj.transform2d.rotation = glm::mod<float>(obj.transform2d.rotation + 0.00005f * i, 2.f * glm::pi<float>());
+            obj.transform.rotation.z = glm::mod<float>(obj.transform.rotation.z + 0.00005f * i, 2.f * glm::pi<float>());
         }
     }
 }

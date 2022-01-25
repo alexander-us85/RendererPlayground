@@ -1,15 +1,17 @@
 #include <stdexcept>
 #include "app.hpp"
 #include "simple_render_system.hpp"
-//#include "sierpinski.hpp"
+#include "sierpinski.hpp"
 #include "gravity.hpp"
+#include "cube.hpp"
 
 namespace vr
 {
     App::App()
     {
         //demo = std::make_unique<Sierpinski>();
-        demo = std::make_unique<Gravity>(9.81f);
+        //demo = std::make_unique<Gravity>(1.f);
+        demo = std::make_unique<Cube>();
         demo->init(device);
     }
 
