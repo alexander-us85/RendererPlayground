@@ -165,6 +165,7 @@
     <ClCompile Include="..\src\geometry.cpp" />
     <ClCompile Include="..\src\gfx_device.cpp" />
     <ClCompile Include="..\src\gravity.cpp" />
+    <ClCompile Include="..\src\keyboard.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\model.cpp" />
     <ClCompile Include="..\src\pipeline.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="..\include\geometry.hpp" />
     <ClInclude Include="..\include\gfx_device.hpp" />
     <ClInclude Include="..\include\gravity.hpp" />
+    <ClInclude Include="..\include\keyboard.hpp" />
     <ClInclude Include="..\include\model.hpp" />
     <ClInclude Include="..\include\pipeline.hpp" />
     <ClInclude Include="..\include\renderer.hpp" />

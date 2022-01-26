@@ -12,10 +12,11 @@ namespace vr
         Window(uint32_t w, uint32_t h, std::string name);
         ~Window();
 
-        bool shouldClose()              { return glfwWindowShouldClose(window); }
-        VkExtent2D getExtent()          { return { width, height }; }
-        bool wasWindowResized()         { return framebufferResized; }
-        void resetWindowResizedFlag()   { framebufferResized = false; }
+        bool shouldClose()                { return glfwWindowShouldClose(window); }
+        VkExtent2D getExtent()            { return { width, height }; }
+        bool wasWindowResized()           { return framebufferResized; }
+        void resetWindowResizedFlag()     { framebufferResized = false; }
+        GLFWwindow* getGLFWWindow() const { return window; }
 
         void createWindowSurface(VkInstance instance, VkSurfaceKHR* surface);
 

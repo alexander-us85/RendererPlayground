@@ -8,7 +8,6 @@
 #include <glm/gtc/constants.hpp>
 
 #pragma warning(disable:26812)
-
 namespace vr
 {
     struct SimplePushConstantData
@@ -66,13 +65,12 @@ namespace vr
         const Camera& camera)
     {
         pipeline->bind(commandBuffer);
-
+        auto projectionView = camera.getProjection() * camera.getView();
         for (auto& obj : gameObjects) {
 
             SimplePushConstantData push{};
             push.color = obj.color;
-            push.transform = camera.getProjection() * obj.transform.mat4();
-
+            push.transform = projectionView * obj.transform.mat4();
             vkCmdPushConstants(
                 commandBuffer,
                 pipelineLayout,
