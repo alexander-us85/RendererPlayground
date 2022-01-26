@@ -18,6 +18,10 @@ namespace vr
     struct Demo
     {
     public:
+        Demo() {}
+        Demo(const Demo&) = delete;
+        void operator=(const Demo&) = delete;
+
         virtual void init(Device& device) = 0;
         virtual std::vector<GameObject>& getGameObjects() = 0;
         virtual void update(const float dt) = 0;

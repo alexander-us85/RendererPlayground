@@ -10,9 +10,6 @@ namespace vr
         Gravity(float strength) : strengthGravity{ strength }, gravityBodiesBeginIndex{ 0 }, vectorFieldBeginIndex{ 0 } {}
         ~Gravity() override { gameObjects.clear(); }
 
-        Gravity(const Gravity&) = delete;
-        void operator=(const Gravity&) = delete;
-
         void init(Device& device);
         std::vector<GameObject>& getGameObjects() { return gameObjects; }
         void update(const float dt);
