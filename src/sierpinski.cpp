@@ -31,9 +31,9 @@ namespace vr
 
     void Sierpinski::init(Device& device)
     {
-        std::vector<Model::Vertex> vertices{};
-        sierpinski(vertices, 4, { -0.5f, 0.5f, 1.5f }, { 0.5f, 0.5f, 1.5f }, { 0.0f, -0.5f, 1.5f });
-        auto model = std::make_shared<Model>(device, vertices);
+        Model::MeshData meshData{};
+        sierpinski(meshData.vertices, 4, { -0.5f, 0.5f, 1.5f }, { 0.5f, 0.5f, 1.5f }, { 0.0f, -0.5f, 1.5f });
+        auto model = std::make_shared<Model>(device, meshData);
 
         std::vector<glm::vec3> colors{
             { 0.0f, 0.39f, 0.49f},

@@ -21,7 +21,13 @@ namespace vr
             static std::vector<VkVertexInputAttributeDescription> getAttributeDescriptions();
         };
 
-        Model(Device& device, const std::vector<Vertex>& vertices);
+        struct MeshData
+        {
+            std::vector<Vertex>     vertices{};
+            std::vector<uint32_t>   indices{};
+        };
+
+        Model(Device& device, const MeshData& meshData);
         ~Model();
 
         Model(const Model&) = delete;
@@ -32,11 +38,16 @@ namespace vr
 
 
     private:
-        void createVertexBuffers(const std::vector<Vertex>& vertices);
+        void createVertexBuffer(const std::vector<Vertex>& vertices);
+        void createIndexBuffer(const std::vector<uint32_t>& indices);
 
         Device&         device;
         VkBuffer        vertexBuffer;
         VkDeviceMemory  vertexBufferMemory;
         uint32_t        vertexCount;
+        VkBuffer        indexBuffer;
+        VkDeviceMemory  indexBufferMemory;
+        uint32_t        indexCount;
+        bool            hasIndexBuffer = false;
     };
 }
