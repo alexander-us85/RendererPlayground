@@ -12,9 +12,8 @@ namespace vr
 {
     struct SimplePushConstantData
     {
-        glm::mat4              transform{ 1.f };
-        alignas(16) glm::vec3  color;
-        int                    demoKind;
+        glm::mat4 transform{ 1.f };
+        glm::mat4 normalMatrix{ 1.f };
     };
 
     SimpleRenderSystem::SimpleRenderSystem(Device& device, VkRenderPass renderPass) : device{device}
@@ -56,8 +55,8 @@ namespace vr
         pipelineConfig.pipelineLayout = pipelineLayout;
         pipeline = std::make_unique<Pipeline>(
             device,
-            "shaders/simple_shader.vert.spv",
-            "shaders/simple_shader.frag.spv",
+            "shaders/diffuse.vert.spv",//"shaders/simple_shader.vert.spv",
+            "shaders/diffuse.frag.spv",//"shaders/simple_shader.frag.spv",
             pipelineConfig
         );
     }
@@ -70,9 +69,9 @@ namespace vr
         for (auto& obj : gameObjects) {
 
             SimplePushConstantData push{};
-            push.color = obj.color;
-            push.transform = projectionView * obj.transform.mat4();
-            push.demoKind = demoKind;
+            auto modelMatrix = obj.transform.mat4();
+            push.transform = projectionView * modelMatrix;
+            push.normalMatrix = obj.transform.normalMatrix();
 
             vkCmdPushConstants(
                 commandBuffer,

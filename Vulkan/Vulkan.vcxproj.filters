@@ -136,5 +136,11 @@
     <None Include="..\shaders\simple_shader.vert">
       <Filter>Shaders</Filter>
     </None>
+    <None Include="..\shaders\diffuse.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\shaders\diffuse.vert">
+      <Filter>Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>

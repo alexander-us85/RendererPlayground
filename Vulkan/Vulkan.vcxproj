@@ -197,6 +197,8 @@
     <ClInclude Include="..\include\window.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\shaders\diffuse.frag" />
+    <None Include="..\shaders\diffuse.vert" />
     <None Include="..\shaders\simple_shader.frag">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\VulkanSDK\1.2.198.1\Bin\glslc %(Identity) -o %(Identity).spv</Command>

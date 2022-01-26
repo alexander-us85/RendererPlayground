@@ -148,17 +148,12 @@ namespace vr
 
     std::vector<VkVertexInputAttributeDescription> Model::Vertex::getAttributeDescriptions()
     {
-        std::vector<VkVertexInputAttributeDescription> attributeDescriptions(2);
-        attributeDescriptions[0].binding = 0;
-        attributeDescriptions[0].location = 0;
-        attributeDescriptions[0].format = VK_FORMAT_R32G32B32_SFLOAT;
-        attributeDescriptions[0].offset = offsetof(Vertex, position);
-
-        attributeDescriptions[1].binding = 0;
-        attributeDescriptions[1].location = 1;
-        attributeDescriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT;
-        attributeDescriptions[1].offset = offsetof(Vertex, color);
-        return attributeDescriptions;
+        std::vector<VkVertexInputAttributeDescription> attrDesc;
+        attrDesc.push_back({ 0, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(Vertex, position) });
+        attrDesc.push_back({ 1, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(Vertex, color) });
+        attrDesc.push_back({ 2, 0, VK_FORMAT_R32G32B32_SFLOAT, offsetof(Vertex, normal) });
+        attrDesc.push_back({ 3, 0, VK_FORMAT_R32G32_SFLOAT,    offsetof(Vertex, uv) });
+        return attrDesc;
     }
 
     std::unique_ptr<Model> Model::createModelFromFile(Device& device, const std::string& filePath)
@@ -197,16 +192,11 @@ namespace vr
                         attrib.vertices[3 * static_cast<size_t>(index.vertex_index) + 2]
                     };
 
-                    auto colorIndex = 3 * index.vertex_index + 2;
-                    if (colorIndex < attrib.colors.size()) {
-                        vertex.color = {
-                            attrib.colors[static_cast<size_t>(colorIndex) - 2],
-                            attrib.colors[static_cast<size_t>(colorIndex) - 1],
-                            attrib.colors[static_cast<size_t>(colorIndex) - 0]
-                        };
-                    } else {
-                        vertex.color = { 1.f, 1.f, 1.f }; // Default color
-                    }
+                    vertex.color = {
+                        attrib.colors[3 * static_cast<size_t>(index.vertex_index) + 0],
+                        attrib.colors[3 * static_cast<size_t>(index.vertex_index) + 1],
+                        attrib.colors[3 * static_cast<size_t>(index.vertex_index) + 2]
+                    };
                 }
 
                 if (index.normal_index >= 0) {
