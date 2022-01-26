@@ -25,6 +25,7 @@ namespace vr
     void App::run()
     {
         SimpleRenderSystem simpleRenderSystem{ device, renderer.getSwapChainRenderPass() };
+        simpleRenderSystem.demoKind = static_cast<int32_t>(demo->getDemoKind());
         Camera camera{};
         auto currentTime = std::chrono::high_resolution_clock::now();
         auto viewerObject = GameObject::createGameObject(); // Stores the camera state for now

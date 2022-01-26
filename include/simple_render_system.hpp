@@ -19,6 +19,7 @@ namespace vr
 
         void renderGameObjects(VkCommandBuffer commandBuffer, std::vector<GameObject>& gameObjects,
             const Camera& camera);
+        int demoKind;
 
 
     private:

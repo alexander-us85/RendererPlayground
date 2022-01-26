@@ -16,6 +16,7 @@ namespace vr
         void init(Device& device);
         void update(const float dt);
         std::vector<GameObject>& getGameObjects() { return gameObjects; }
+        DemoKind getDemoKind() { return kDemoKindCube; }
 
 
     private:

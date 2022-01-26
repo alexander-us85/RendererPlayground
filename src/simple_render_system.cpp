@@ -14,6 +14,7 @@ namespace vr
     {
         glm::mat4              transform{ 1.f };
         alignas(16) glm::vec3  color;
+        int                    demoKind;
     };
 
     SimpleRenderSystem::SimpleRenderSystem(Device& device, VkRenderPass renderPass) : device{device}
@@ -71,6 +72,8 @@ namespace vr
             SimplePushConstantData push{};
             push.color = obj.color;
             push.transform = projectionView * obj.transform.mat4();
+            push.demoKind = demoKind;
+
             vkCmdPushConstants(
                 commandBuffer,
                 pipelineLayout,
