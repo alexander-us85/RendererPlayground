@@ -79,7 +79,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <LibraryPath>C:\VulkanSDK\1.2.198.1\Lib;D:\code\vulkan\thirdparty\glfw\build\src\Release;$(LibraryPath)</LibraryPath>
-    <IncludePath>D:\code\vulkan\thirdparty\glm;D:\code\vulkan\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\code\vulkan\thirdparty;C:\VulkanSDK\1.2.198.1\Include;D:\code\vulkan\thirdparty\glm;D:\code\vulkan\include;D:\code\vulkan\thirdparty\glfw\include;$(IncludePath)</IncludePath>
     <CustomBuildBeforeTargets>Build</CustomBuildBeforeTargets>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -119,8 +119,9 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\VulkanSDK\1.2.198.1\Include;D:\code\vulkan\thirdparty\glfw\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -173,6 +174,7 @@
     <ClCompile Include="..\src\sierpinski.cpp" />
     <ClCompile Include="..\src\simple_render_system.cpp" />
     <ClCompile Include="..\src\swap_chain.cpp" />
+    <ClCompile Include="..\src\utils.cpp" />
     <ClCompile Include="..\src\window.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -191,6 +193,7 @@
     <ClInclude Include="..\include\sierpinski.hpp" />
     <ClInclude Include="..\include\simple_render_system.hpp" />
     <ClInclude Include="..\include\swap_chain.hpp" />
+    <ClInclude Include="..\include\utils.hpp" />
     <ClInclude Include="..\include\window.hpp" />
   </ItemGroup>
   <ItemGroup>

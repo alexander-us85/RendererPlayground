@@ -5,7 +5,11 @@ namespace vr
 {
     void vr::Cube::init(Device& device)
     {
+#if false
         std::shared_ptr<Model> model = createCubeModel(device, { .0f, .0f, .0f });
+#else
+        std::shared_ptr<Model> model = Model::createModelFromFile(device, "models/smooth_vase.obj");
+#endif
         auto cube = GameObject::createGameObject();
         cube.model = model;
         cube.transform.translation = { .0f, .0f, 2.5f };
