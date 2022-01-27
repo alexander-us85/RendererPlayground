@@ -160,6 +160,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\app.cpp" />
+    <ClCompile Include="..\src\frame_info.cpp" />
+    <ClCompile Include="..\src\gfx_buffer.cpp" />
     <ClCompile Include="..\src\camera.cpp" />
     <ClCompile Include="..\src\cube.cpp" />
     <ClCompile Include="..\src\game_object.cpp" />
@@ -179,6 +181,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\app.hpp" />
+    <ClInclude Include="..\include\frame_info.hpp" />
+    <ClInclude Include="..\include\gfx_buffer.hpp" />
     <ClInclude Include="..\include\camera.hpp" />
     <ClInclude Include="..\include\cube.hpp" />
     <ClInclude Include="..\include\demo.hpp" />

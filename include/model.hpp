@@ -6,6 +6,7 @@
 #include <vector>
 #include <memory>
 #include "gfx_device.hpp"
+#include "gfx_buffer.hpp"
 
 namespace vr
 {
@@ -37,7 +38,7 @@ namespace vr
         };
 
         Model(Device& device, const MeshData& meshData);
-        ~Model();
+        ~Model() {};
 
         Model(const Model&) = delete;
         void operator=(const Model&) = delete;
@@ -52,13 +53,12 @@ namespace vr
         void createVertexBuffer(const std::vector<Vertex>& vertices);
         void createIndexBuffer(const std::vector<uint32_t>& indices);
 
-        Device&         device;
-        VkBuffer        vertexBuffer;
-        VkDeviceMemory  vertexBufferMemory;
-        uint32_t        vertexCount;
-        VkBuffer        indexBuffer;
-        VkDeviceMemory  indexBufferMemory;
-        uint32_t        indexCount;
-        bool            hasIndexBuffer = false;
+        std::unique_ptr<GfxBuffer> vertexBuffer;
+        std::unique_ptr<GfxBuffer> indexBuffer;
+
+        Device&                    device;
+        uint32_t                   vertexCount;
+        uint32_t                   indexCount;
+        bool                       hasIndexBuffer = false;
     };
 }

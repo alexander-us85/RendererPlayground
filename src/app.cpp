@@ -7,9 +7,17 @@
 #include "cube.hpp"
 #include "camera.hpp"
 #include "keyboard.hpp"
+#include "gfx_buffer.hpp"
 
 namespace vr
 {
+    struct GlobalUBO
+    {
+        glm::mat4 projectionView{ 1.f };
+        glm::vec3 lightDirection = glm::normalize(glm::vec3{ 1.f, -3.f, -1.f });
+    };
+
+
     App::App()
     {
         //demo = std::make_unique<Sierpinski>();
@@ -24,6 +32,18 @@ namespace vr
 
     void App::run()
     {
+        std::vector<std::unique_ptr<GfxBuffer>> uboBuffers(SwapChain::MAX_FRAMES_IN_FLIGHT);
+        for (int i = 0; i < uboBuffers.size(); i++) {
+            uboBuffers[i] = std::make_unique<GfxBuffer>(
+                device,
+                sizeof(GlobalUBO),
+                1,
+                VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT,
+                VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT
+            );
+            uboBuffers[i]->map();
+        }
+
         SimpleRenderSystem simpleRenderSystem{ device, renderer.getSwapChainRenderPass() };
         simpleRenderSystem.demoKind = static_cast<int32_t>(demo->getDemoKind());
         Camera camera{};
@@ -47,8 +67,18 @@ namespace vr
 
             demo->update(1.f / 6000.f);
             if (auto commandBuffer = renderer.beginFrame()) {
+                int frameIndex = renderer.getFrameIndex();
+                FrameInfo frameInfo{ frameIndex, frameTime, commandBuffer, camera };
+
+                // Update
+                GlobalUBO ubo{};
+                ubo.projectionView = camera.getProjection() * camera.getView();
+                uboBuffers[frameIndex]->writeToBuffer(&ubo);
+                uboBuffers[frameIndex]->flush();
+
+                // Render
                 renderer.beginSwapChainRenderPass(commandBuffer);
-                simpleRenderSystem.renderGameObjects(commandBuffer, demo->getGameObjects(), camera);
+                simpleRenderSystem.renderGameObjects(frameInfo, demo->getGameObjects());
                 renderer.endSwapChainRenderPass(commandBuffer);
                 renderer.endFrame();
             }
