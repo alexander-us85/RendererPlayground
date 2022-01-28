@@ -160,6 +160,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\app.cpp" />
+    <ClCompile Include="..\src\descriptors.cpp" />
     <ClCompile Include="..\src\frame_info.cpp" />
     <ClCompile Include="..\src\gfx_buffer.cpp" />
     <ClCompile Include="..\src\camera.cpp" />
@@ -181,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\app.hpp" />
+    <ClInclude Include="..\include\descriptors.hpp" />
     <ClInclude Include="..\include\frame_info.hpp" />
     <ClInclude Include="..\include\gfx_buffer.hpp" />
     <ClInclude Include="..\include\camera.hpp" />

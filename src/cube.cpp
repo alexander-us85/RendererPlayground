@@ -5,16 +5,21 @@ namespace vr
 {
     void vr::Cube::init(Device& device)
     {
-#if false
-        std::shared_ptr<Model> model = createCubeModel(device, { .0f, .0f, .0f });
-#else
-        std::shared_ptr<Model> model = Model::createModelFromFile(device, "models/Winged_Victory.obj");
-#endif
-        auto cube = GameObject::createGameObject();
-        cube.model = model;
-        cube.transform.translation = { .0f, .0f, 2.5f };
-        cube.transform.scale = { .5f, -.5f, .5f }; // Scale negative to invert Y axis.
-        gameObjects.push_back(std::move(cube));
+        std::shared_ptr<Model> model1 = Model::createModelFromFile(device, "models/Winged_Victory.obj");
+        std::shared_ptr<Model> model2 = Model::createModelFromFile(device, "models/Winged_Victory_Smooth.obj");
+
+        auto obj1 = GameObject::createGameObject();
+        obj1.model = model1;
+        obj1.transform.translation = { .0f, .0f, 2.5f };
+        obj1.transform.scale = { 1.f, -1.f, 1.f }; // Scale negative to invert Y axis.
+
+        auto obj2 = GameObject::createGameObject();
+        obj2.model = model2;
+        obj2.transform.translation = { 1.f, .0f, 2.5f };
+        obj2.transform.scale = { 1.f, -1.f, 1.f };
+
+        gameObjects.push_back(std::move(obj1));
+        gameObjects.push_back(std::move(obj2));
     }
 
 

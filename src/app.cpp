@@ -20,6 +20,9 @@ namespace vr
 
     App::App()
     {
+        globalDescriptorPool = DescriptorPool::Builder(device).setMaxSets(SwapChain::MAX_FRAMES_IN_FLIGHT)
+            .addPoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, SwapChain::MAX_FRAMES_IN_FLIGHT).build();
+
         //demo = std::make_unique<Sierpinski>();
         //demo = std::make_unique<Gravity>(1.f);
         demo = std::make_unique<Cube>();
@@ -44,7 +47,19 @@ namespace vr
             uboBuffers[i]->map();
         }
 
-        SimpleRenderSystem simpleRenderSystem{ device, renderer.getSwapChainRenderPass() };
+        auto globalSetLayout = DescriptorSetLayout::Builder(device)
+            .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT)
+            .build();
+        std::vector<VkDescriptorSet> globalDescriptorSets(SwapChain::MAX_FRAMES_IN_FLIGHT);
+        for (int i = 0; i < globalDescriptorSets.size(); i++) {
+            auto bufferInfo = uboBuffers[i]->descriptorInfo();
+            DescriptorWriter(*globalSetLayout, *globalDescriptorPool)
+                .writeBuffer(0, &bufferInfo)
+                .build(globalDescriptorSets[i]);
+        }
+
+        SimpleRenderSystem simpleRenderSystem { device, renderer.getSwapChainRenderPass(),
+            globalSetLayout->getDescriptorSetLayout() };
         simpleRenderSystem.demoKind = static_cast<int32_t>(demo->getDemoKind());
         Camera camera{};
         auto currentTime = std::chrono::high_resolution_clock::now();
@@ -68,7 +83,7 @@ namespace vr
             demo->update(1.f / 6000.f);
             if (auto commandBuffer = renderer.beginFrame()) {
                 int frameIndex = renderer.getFrameIndex();
-                FrameInfo frameInfo{ frameIndex, frameTime, commandBuffer, camera };
+                FrameInfo frameInfo{ frameIndex, frameTime, commandBuffer, camera, globalDescriptorSets[frameIndex] };
 
                 // Update
                 GlobalUBO ubo{};

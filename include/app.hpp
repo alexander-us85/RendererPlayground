@@ -3,6 +3,7 @@
 #include "gfx_device.hpp"
 #include "renderer.hpp"
 #include "game_object.hpp"
+#include "descriptors.hpp"
 #include "demo.hpp"
 #include <memory>
 
@@ -23,9 +24,10 @@ namespace vr
         void run();
 
     private:
-        Window                       window{ WIDTH, HEIGHT, "Output window" };
-        Device                       device{ window };
-        Renderer                     renderer{ window, device };
-        std::unique_ptr<Demo>        demo;
+        Window                           window{ WIDTH, HEIGHT, "Output window" };
+        Device                           device{ window };
+        Renderer                         renderer{ window, device };
+        std::unique_ptr<DescriptorPool>  globalDescriptorPool{};
+        std::unique_ptr<Demo>            demo;
     };
 }
