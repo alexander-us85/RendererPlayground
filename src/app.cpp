@@ -2,6 +2,7 @@
 #include <chrono>
 #include "app.hpp"
 #include "simple_render_system.hpp"
+#include "point_light_render_system.hpp"
 #include "cube.hpp"
 #include "camera.hpp"
 #include "keyboard.hpp"
@@ -11,7 +12,8 @@ namespace vr
 {
     struct GlobalUBO
     {
-        glm::mat4 projectionView{ 1.f };
+        glm::mat4 projection{ 1.f };
+        glm::mat4 view{ 1.f };
         glm::vec4 ambientLightColor{ 1.f, 1.f, 1.f, .02f }; // w is the intensity of light
         glm::vec3 lightPosition{ 0.0f, -1.f, 1.0f };
         alignas(16) glm::vec4 lightColor{ 1.f }; // w is the intensity of light
@@ -60,6 +62,8 @@ namespace vr
 
         SimpleRenderSystem simpleRenderSystem { device, renderer.getSwapChainRenderPass(),
             globalSetLayout->getDescriptorSetLayout() };
+        PointLightRenderSystem pointLightRenderSystem{ device, renderer.getSwapChainRenderPass(),
+            globalSetLayout->getDescriptorSetLayout() };
         Camera camera{};
         auto currentTime = std::chrono::high_resolution_clock::now();
         auto viewerObject = GameObject::createGameObject(); // Stores the camera state for now
@@ -93,13 +97,15 @@ namespace vr
 
                 // Update
                 GlobalUBO ubo{};
-                ubo.projectionView = camera.getProjection() * camera.getView();
+                ubo.projection = camera.getProjection();
+                ubo.view = camera.getView();
                 uboBuffers[frameIndex]->writeToBuffer(&ubo);
                 uboBuffers[frameIndex]->flush();
 
                 // Render
                 renderer.beginSwapChainRenderPass(commandBuffer);
                 simpleRenderSystem.renderGameObjects(frameInfo);
+                pointLightRenderSystem.render(frameInfo);
                 renderer.endSwapChainRenderPass(commandBuffer);
                 renderer.endFrame();
             }

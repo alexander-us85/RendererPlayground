@@ -172,6 +172,7 @@
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\model.cpp" />
     <ClCompile Include="..\src\pipeline.cpp" />
+    <ClCompile Include="..\src\point_light_render_system.cpp" />
     <ClCompile Include="..\src\renderer.cpp" />
     <ClCompile Include="..\src\simple_render_system.cpp" />
     <ClCompile Include="..\src\swap_chain.cpp" />
@@ -192,6 +193,7 @@
     <ClInclude Include="..\include\keyboard.hpp" />
     <ClInclude Include="..\include\model.hpp" />
     <ClInclude Include="..\include\pipeline.hpp" />
+    <ClInclude Include="..\include\point_light_render_system.hpp" />
     <ClInclude Include="..\include\renderer.hpp" />
     <ClInclude Include="..\include\simple_render_system.hpp" />
     <ClInclude Include="..\include\swap_chain.hpp" />
@@ -201,6 +203,8 @@
   <ItemGroup>
     <None Include="..\shaders\diffuse.frag" />
     <None Include="..\shaders\diffuse.vert" />
+    <None Include="..\shaders\point_light.frag" />
+    <None Include="..\shaders\point_light.vert" />
     <None Include="..\shaders\simple_shader.frag">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\VulkanSDK\1.2.198.1\Bin\glslc %(Identity) -o %(Identity).spv</Command>

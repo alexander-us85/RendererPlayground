@@ -74,6 +74,9 @@
     <ClCompile Include="..\src\descriptors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\point_light_render_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\window.hpp">
@@ -130,6 +133,9 @@
     <ClInclude Include="..\include\descriptors.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\point_light_render_system.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\shaders\simple_shader.frag">
@@ -142,6 +148,12 @@
       <Filter>Shaders</Filter>
     </None>
     <None Include="..\shaders\diffuse.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\shaders\point_light.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="..\shaders\point_light.vert">
       <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
