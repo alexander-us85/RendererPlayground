@@ -1,6 +1,7 @@
 #pragma once
 #include "model.hpp"
 #include <memory>
+#include <unordered_map>
 #include <glm/gtc/matrix_transform.hpp>
 
 namespace vr
@@ -27,6 +28,7 @@ namespace vr
     {
     public:
         using id_t = unsigned int;
+        using Map = std::unordered_map<id_t, GameObject>;
 
         static GameObject createGameObject()
         {

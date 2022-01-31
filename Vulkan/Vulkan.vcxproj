@@ -168,13 +168,11 @@
     <ClCompile Include="..\src\game_object.cpp" />
     <ClCompile Include="..\src\geometry.cpp" />
     <ClCompile Include="..\src\gfx_device.cpp" />
-    <ClCompile Include="..\src\gravity.cpp" />
     <ClCompile Include="..\src\keyboard.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\model.cpp" />
     <ClCompile Include="..\src\pipeline.cpp" />
     <ClCompile Include="..\src\renderer.cpp" />
-    <ClCompile Include="..\src\sierpinski.cpp" />
     <ClCompile Include="..\src\simple_render_system.cpp" />
     <ClCompile Include="..\src\swap_chain.cpp" />
     <ClCompile Include="..\src\utils.cpp" />
@@ -191,12 +189,10 @@
     <ClInclude Include="..\include\game_object.hpp" />
     <ClInclude Include="..\include\geometry.hpp" />
     <ClInclude Include="..\include\gfx_device.hpp" />
-    <ClInclude Include="..\include\gravity.hpp" />
     <ClInclude Include="..\include\keyboard.hpp" />
     <ClInclude Include="..\include\model.hpp" />
     <ClInclude Include="..\include\pipeline.hpp" />
     <ClInclude Include="..\include\renderer.hpp" />
-    <ClInclude Include="..\include\sierpinski.hpp" />
     <ClInclude Include="..\include\simple_render_system.hpp" />
     <ClInclude Include="..\include\swap_chain.hpp" />
     <ClInclude Include="..\include\utils.hpp" />

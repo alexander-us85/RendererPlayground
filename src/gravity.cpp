@@ -16,7 +16,7 @@ namespace vr
         red.rigidBody2D.velocity = { -.5f, .0f, .0f };
         red.rigidBody2D.mass = 1.f;
         red.model = circleModel;
-        gameObjects.push_back(std::move(red));
+        gameObjects.emplace(red.getId(), std::move(red));
 
         auto blue = GameObject::createGameObject();
         blue.transform.scale = glm::vec3{.05f, .05f, 1.f };
@@ -25,7 +25,7 @@ namespace vr
         blue.rigidBody2D.velocity = { .5f, .0f, .0f };
         blue.rigidBody2D.mass = 1.f;
         blue.model = circleModel;
-        gameObjects.push_back(std::move(blue));
+        gameObjects.emplace(blue.getId(), std::move(blue));
 
         auto green = GameObject::createGameObject();
         green.transform.scale = glm::vec3{ .1f, .1f, 1.f };
@@ -35,7 +35,7 @@ namespace vr
         green.rigidBody2D.mass = 10.f;
         green.rigidBody2D.radius = 3.f;
         green.model = bigCircleModel;
-        gameObjects.push_back(std::move(green));
+        gameObjects.emplace(green.getId(), std::move(green));
 
         gravityBodiesBeginIndex = 0;
         vectorFieldBeginIndex = gameObjects.size();
@@ -53,7 +53,7 @@ namespace vr
                 vf.color = glm::vec3(1.0f);
                 vf.model = squareModel;
                 vf.rigidBody2D.mass = 1.0f;
-                gameObjects.push_back(std::move(vf));
+                gameObjects.emplace(vf.getId(), std::move(vf));
             }
         }
     }

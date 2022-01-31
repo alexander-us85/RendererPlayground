@@ -6,15 +6,6 @@
 
 namespace vr
 {
-    enum DemoKind
-    {
-        kDemoKindSierpinski,
-        kDemoKindGravity,
-        kDemoKindCube,
-
-        kDemoKindCount
-    };
-
     struct Demo
     {
     public:
@@ -23,9 +14,8 @@ namespace vr
         void operator=(const Demo&) = delete;
 
         virtual void init(Device& device) = 0;
-        virtual std::vector<GameObject>& getGameObjects() = 0;
+        virtual GameObject::Map& getGameObjects() = 0;
         virtual void update(const float dt) = 0;
         virtual ~Demo() {};
-        virtual DemoKind getDemoKind() = 0;
     };
 }

@@ -2,8 +2,6 @@
 #include <chrono>
 #include "app.hpp"
 #include "simple_render_system.hpp"
-#include "sierpinski.hpp"
-#include "gravity.hpp"
 #include "cube.hpp"
 #include "camera.hpp"
 #include "keyboard.hpp"
@@ -14,7 +12,9 @@ namespace vr
     struct GlobalUBO
     {
         glm::mat4 projectionView{ 1.f };
-        glm::vec3 lightDirection = glm::normalize(glm::vec3{ 1.f, -3.f, -1.f });
+        glm::vec4 ambientLightColor{ 1.f, 1.f, 1.f, .02f }; // w is the intensity of light
+        glm::vec3 lightPosition{ 0.0f, -1.f, 1.0f };
+        alignas(16) glm::vec4 lightColor{ 1.f }; // w is the intensity of light
     };
 
 
@@ -48,7 +48,7 @@ namespace vr
         }
 
         auto globalSetLayout = DescriptorSetLayout::Builder(device)
-            .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT)
+            .addBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_ALL_GRAPHICS)
             .build();
         std::vector<VkDescriptorSet> globalDescriptorSets(SwapChain::MAX_FRAMES_IN_FLIGHT);
         for (int i = 0; i < globalDescriptorSets.size(); i++) {
@@ -60,7 +60,6 @@ namespace vr
 
         SimpleRenderSystem simpleRenderSystem { device, renderer.getSwapChainRenderPass(),
             globalSetLayout->getDescriptorSetLayout() };
-        simpleRenderSystem.demoKind = static_cast<int32_t>(demo->getDemoKind());
         Camera camera{};
         auto currentTime = std::chrono::high_resolution_clock::now();
         auto viewerObject = GameObject::createGameObject(); // Stores the camera state for now
@@ -78,12 +77,19 @@ namespace vr
             
             float aspect = renderer.getAspectRatio();
             //camera.setOrthographicProjection(-aspect, aspect, -1, 1, -1, 1);
-            camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 10.f);
+            camera.setPerspectiveProjection(glm::radians(50.f), aspect, 0.1f, 1000.f);
 
             demo->update(1.f / 6000.f);
             if (auto commandBuffer = renderer.beginFrame()) {
                 int frameIndex = renderer.getFrameIndex();
-                FrameInfo frameInfo{ frameIndex, frameTime, commandBuffer, camera, globalDescriptorSets[frameIndex] };
+                FrameInfo frameInfo {
+                    frameIndex,
+                    frameTime,
+                    commandBuffer,
+                    camera,
+                    globalDescriptorSets[frameIndex],
+                    demo->getGameObjects()
+                };
 
                 // Update
                 GlobalUBO ubo{};
@@ -93,7 +99,7 @@ namespace vr
 
                 // Render
                 renderer.beginSwapChainRenderPass(commandBuffer);
-                simpleRenderSystem.renderGameObjects(frameInfo, demo->getGameObjects());
+                simpleRenderSystem.renderGameObjects(frameInfo);
                 renderer.endSwapChainRenderPass(commandBuffer);
                 renderer.endFrame();
             }

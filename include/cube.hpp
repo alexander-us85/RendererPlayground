@@ -11,11 +11,10 @@ namespace vr
 
         void init(Device& device);
         void update(const float dt);
-        std::vector<GameObject>& getGameObjects() { return gameObjects; }
-        DemoKind getDemoKind() { return kDemoKindCube; }
+        GameObject::Map& getGameObjects() { return gameObjects; }
 
 
     private:
-        std::vector<GameObject> gameObjects;
+        GameObject::Map gameObjects;
     };
 }

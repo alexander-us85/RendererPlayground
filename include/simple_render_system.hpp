@@ -18,8 +18,7 @@ namespace vr
         SimpleRenderSystem(const SimpleRenderSystem&) = delete;
         void operator=(const SimpleRenderSystem&) = delete;
 
-        void renderGameObjects(FrameInfo& frameInfo, std::vector<GameObject>& gameObjects);
-        int demoKind;
+        void renderGameObjects(FrameInfo& frameInfo);
 
 
     private:

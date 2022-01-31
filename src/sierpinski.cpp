@@ -53,14 +53,15 @@ namespace vr
             triangle.color = colors[i % colors.size()];
             triangle.transform.scale = glm::vec3(.5f, .5f, 1.f) + i * 0.025f;
             triangle.transform.rotation = glm::vec3(0.f, 0.f, i * glm::pi<float>() * .025f);
-            gameObjects.push_back(std::move(triangle));
+            gameObjects.emplace(triangle.getId(), std::move(triangle));
         }
     }
 
     void Sierpinski::update(const float dt)
     {
         int i = 0;
-        for (auto& obj : gameObjects) {
+        for (auto& kv : gameObjects) {
+            auto& obj = kv.second;
             i += 1;
             obj.transform.rotation.z = glm::mod<float>(obj.transform.rotation.z + 0.00005f * i, 2.f * glm::pi<float>());
         }
