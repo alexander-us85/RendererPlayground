@@ -1,8 +1,6 @@
 (def shaders-directory
   (string/join @((os/cwd) "\\" "shaders")))
 
-(print shaders-directory)
-
 (def glsc "C:/VulkanSDK/1.2.198.1/Bin/glslc")
 
 (defn is-folder (path)
