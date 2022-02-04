@@ -23,6 +23,11 @@ namespace vr
         float       radius = 1.0f;
     };
 
+    struct PointLightComponent
+    {
+        float lightIntensity = 1.0f;
+    };
+
 
     class GameObject
     {
@@ -36,6 +41,8 @@ namespace vr
             return GameObject{ currentId++ };
         }
 
+        static GameObject makePointLight(float intensity = 100.f, float radius = 0.01f, glm::vec3 color = glm::vec3{ 1.f });
+
         id_t getId() { return id; }
 
         GameObject(const GameObject&)               = delete;
@@ -47,6 +54,8 @@ namespace vr
         glm::vec3              color{};
         TransformComponent     transform{};
         RigidBodyComponent     rigidBody2D{};
+
+        std::unique_ptr<PointLightComponent> pointLight = nullptr;
 
 
     private:

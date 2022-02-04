@@ -64,4 +64,16 @@ namespace vr
             }
         };
     }
+
+    GameObject GameObject::makePointLight(float intensity, float radius, glm::vec3 color)
+    {
+        GameObject gameObject = GameObject::createGameObject();
+        gameObject.color = color;
+        gameObject.pointLight = std::make_unique<PointLightComponent>();
+        gameObject.pointLight->lightIntensity = intensity;
+        gameObject.transform.scale = { 0.03f, 1.0f, 0.03f };
+        gameObject.transform.translation.z = 2.f;
+        gameObject.transform.translation.y = -0.6f;
+        return gameObject;
+    }
 }

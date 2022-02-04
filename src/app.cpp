@@ -10,16 +10,6 @@
 
 namespace vr
 {
-    struct GlobalUBO
-    {
-        glm::mat4 projection{ 1.f };
-        glm::mat4 view{ 1.f };
-        glm::vec4 ambientLightColor{ 1.f, 1.f, 1.f, .02f }; // w is the intensity of light
-        glm::vec3 lightPosition{ 0.0f, -1.f, 1.0f };
-        alignas(16) glm::vec4 lightColor{ 1.f }; // w is the intensity of light
-    };
-
-
     App::App()
     {
         globalDescriptorPool = DescriptorPool::Builder(device).setMaxSets(SwapChain::MAX_FRAMES_IN_FLIGHT)
@@ -99,6 +89,7 @@ namespace vr
                 GlobalUBO ubo{};
                 ubo.projection = camera.getProjection();
                 ubo.view = camera.getView();
+                pointLightRenderSystem.update(frameInfo, ubo);
                 uboBuffers[frameIndex]->writeToBuffer(&ubo);
                 uboBuffers[frameIndex]->flush();
 

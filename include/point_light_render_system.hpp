@@ -18,6 +18,7 @@ namespace vr
         PointLightRenderSystem(const PointLightRenderSystem&) = delete;
         void operator=(const PointLightRenderSystem&) = delete;
 
+        void update(FrameInfo& frameInfo, GlobalUBO& ubo);
         void render(FrameInfo& frameInfo);
 
 
