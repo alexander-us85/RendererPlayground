@@ -1,5 +1,6 @@
 #include "pipeline.hpp"
 #include "model.hpp"
+#include "shader_module.hpp"
 #include <fstream>
 #include <stdexcept>
 #include <iostream>
@@ -43,12 +44,28 @@ namespace vr
             "Cannot create graphics pipeline: no pipeline layout provided.");
         assert(configInfo.renderPass != VK_NULL_HANDLE &&
             "Cannot create graphics pipeline: not render pass provided.");
-
+#if false
         auto vertCode = readFile(vertFilePath);
         auto fragCode = readFile(fragFilePath);
+#endif
 
-        createShaderModule(vertCode, &vertShaderModule);
-        createShaderModule(fragCode, &fragShaderModule);
+        glslang_initialize_process();
+        ShaderModule vsShaderModule{};
+        ShaderModule fsShaderModule{};
+        if (CompileShaderFile(vertFilePath.c_str(), vsShaderModule) < 1) {
+            throw std::exception("Failed to compile vertex shader.\n");
+        } else {
+            fprintf(stderr, "Vertex shader %s compiled successfully.\n", vertFilePath.c_str());
+        }
+        if (CompileShaderFile(fragFilePath.c_str(), fsShaderModule) < 1) {
+            throw std::exception("Failed to compile fragment shader.\n");
+        } else {
+            fprintf(stderr, "Fragment shader %s compiled successfully.\n", fragFilePath.c_str());
+        }
+        glslang_finalize_process();
+
+        createShaderModule(vsShaderModule.SPIRV, &vertShaderModule);
+        createShaderModule(fsShaderModule.SPIRV, &fragShaderModule);
 
         VkPipelineShaderStageCreateInfo shaderStages[2];
         
@@ -103,11 +120,11 @@ namespace vr
         }
     }
 
-    void Pipeline::createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule) {
+    void Pipeline::createShaderModule(const std::vector<uint32_t>& code, VkShaderModule* shaderModule) {
         VkShaderModuleCreateInfo createInfo{};
         createInfo.sType    = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
         createInfo.codeSize = code.size();
-        createInfo.pCode    = reinterpret_cast<const uint32_t*>(code.data());
+        createInfo.pCode    = code.data();
 
         if (vkCreateShaderModule(device.device(), &createInfo, nullptr, shaderModule) != VK_SUCCESS) {
             throw std::runtime_error("Failed to create shader module.");

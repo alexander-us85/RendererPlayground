@@ -58,8 +58,8 @@ namespace vr
         pipelineConfig.pipelineLayout = pipelineLayout;
         pipeline = std::make_unique<Pipeline>(
             device,
-            "shaders/diffuse.vert.spv",//"shaders/simple_shader.vert.spv",
-            "shaders/diffuse.frag.spv",//"shaders/simple_shader.frag.spv",
+            "shaders/diffuse.vert",//"shaders/simple_shader.vert.spv",
+            "shaders/diffuse.frag",//"shaders/simple_shader.frag.spv",
             pipelineConfig
         );
     }

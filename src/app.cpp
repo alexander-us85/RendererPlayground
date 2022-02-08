@@ -26,20 +26,6 @@ namespace vr
 
     void App::run()
     {
-        glslang_initialize_process();
-        ShaderModule shaderModule{};
-        if (CompileShaderFile("shaders/diffuse.vert", shaderModule) < 1) {
-            throw std::exception("Failed to compile vertex shader.\n");
-        } else {
-            fprintf(stderr, "Vertex shader compiled successfully.\n");
-        }
-        if (CompileShaderFile("shaders/diffuse.frag", shaderModule) < 1) {
-            throw std::exception("Failed to compile fragment shader.\n");
-        } else {
-            fprintf(stderr, "Fragment shader compiled successfully.\n");
-        }
-        glslang_finalize_process();
-
         std::vector<std::unique_ptr<GfxBuffer>> uboBuffers(SwapChain::MAX_FRAMES_IN_FLIGHT);
         for (int i = 0; i < uboBuffers.size(); i++) {
             uboBuffers[i] = std::make_unique<GfxBuffer>(

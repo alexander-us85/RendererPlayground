@@ -50,7 +50,7 @@ namespace vr
             const std::string&        fragFilePath,
             const PipelineConfigInfo& configInfo
         );
-        void createShaderModule(const std::vector<char>& code, VkShaderModule* shaderModule);
+        void createShaderModule(const std::vector<uint32_t>& code, VkShaderModule* shaderModule);
 
         Device&        device;
         VkPipeline     graphicsPipeline;
