@@ -11,6 +11,9 @@ set(GLFW_BUILD_TESTS OFF CACHE BOOL "")
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "")
 set(GLFW_INSTALL OFF CACHE BOOL "")
 
+set(VULKAN_SDK "C:/VulkanSDK/1.2.198.1/")
+link_directories(${VULKAN_SDK}/Lib)
+
 include_directories(build/src/glm)
 include_directories(build/src/glfw/include)
 include_directories(build/src/vulkan/include)
@@ -19,6 +22,6 @@ include_directories(include)
 
 add_subdirectory(build/src/glfw)
 
-SETUP_APP(VulkanRenderer "VulkanRenderer")
+SETUP_APP(VulkanRenderer)
 
-target_link_libraries(VulkanRenderer glfw)
+target_link_libraries(VulkanRenderer glfw vulkan-1)

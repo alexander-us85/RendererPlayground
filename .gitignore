@@ -401,6 +401,7 @@ FodyWeavers.xsd
 thirdparty
 ./dist/*
 dist
-./build/src/*
-./build/src
-./build/.bootstrap.json
+build/src/*
+build/src
+build/.bootstrap.json
+*.exe
