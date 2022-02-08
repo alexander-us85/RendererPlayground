@@ -38,7 +38,7 @@ namespace vr
         };
 
         for (int i = 0; i < lightColors.size(); i++) {
-            auto pointLight = GameObject::makePointLight(0.2);
+            auto pointLight = GameObject::makePointLight(0.2f);
             pointLight.color = lightColors[i];
             auto rotateLight = glm::rotate(
                 glm::mat4(1.f),

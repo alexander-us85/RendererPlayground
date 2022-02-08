@@ -1,0 +1,41 @@
+[
+{
+    "name": "vulkan",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/KhronosGroup/Vulkan-Headers.git",
+        "revision": "v1.2.198"
+    }
+},
+{
+    "name": "glfw",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/glfw/glfw.git",
+        "revision": "3.3.4"
+    }
+},
+{
+    "name": "glm",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/g-truc/glm.git",
+        "revision": "0.9.9.8"
+    }
+},
+{
+    "name": "glslang",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/KhronosGroup/glslang.git",
+        "revision": "6fe560f74f472726027e4059692c6eb1e7d972dc"
+    }
+},
+{
+    "name": "tiny_obj_loader",
+    "source": {
+        "type" : "git",
+        "url" : "https://github.com/tinyobjloader/tinyobjloader"
+    }
+}
+]

@@ -399,3 +399,8 @@ FodyWeavers.xsd
 
 ./thirdarty/*
 thirdparty
+./dist/*
+dist
+./build/src/*
+./build/src
+./build/.bootstrap.json
