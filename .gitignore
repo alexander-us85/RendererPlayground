@@ -405,3 +405,5 @@ build/src/*
 build/src
 build/.bootstrap.json
 *.exe
+.vscode
+.vscode/*
