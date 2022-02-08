@@ -54,7 +54,7 @@ namespace vr
 
     void vr::Cube::update(const float dt)
     {
-        auto rotate = glm::rotate(glm::mat4(1.f), dt, { 0.f, -1.f, 0.f });
+        auto rotate = glm::rotate(glm::mat4(1.f), dt, { 0.f, -1.f, 2.5f });
         for (auto& obj : gameObjects) {
             if (obj.second.pointLight == nullptr) {
                 continue;

@@ -6,6 +6,8 @@ namespace vr
 {
     Renderer::Renderer(Window& wind, Device& dev) : window{ wind }, device{ dev }
     {
+        isFrameStarted = false;
+        currentFrameIndex = 0;
         recreateSwapChain();
         createCommandBuffers();
     }
